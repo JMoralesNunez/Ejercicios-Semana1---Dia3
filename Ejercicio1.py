@@ -1,5 +1,4 @@
 Library = {}
-Books = {}
 serial = len(Library)
 
 print("====================================")
@@ -7,6 +6,7 @@ print("Welcome to your library database!")
 
 menu = True
 while menu:
+    print("====================================")
     print("What would you like to do?: ")
     print("====================================")
     print("1. Add a new book")
@@ -28,11 +28,42 @@ while menu:
             author = input("Enter the author of the book: ")
             year = input("Enter the release year of the book: ")
             book = {"title":title, "author":author, "year":year}
-            Books.update({serial:book})
-            Library.update(Books)
+            Library.update({serial:book})
             reset = input("Would you like to add another book? Y/N > ")
             if reset.upper() == "N":
-                print(Books)
                 print(Library)
                 initiate = False
-            
+
+    if option == "2":
+        print("====================================")
+        option2 = input("Press (1) to see all books or press (2) to search for a book: ")
+        if option2 == "1":
+            for key, item in Library.items():
+                print(f"ID: {key} -------------------- Book: {item}")
+        elif option2 == "2":
+            booksearch = int(input("Enter the ID of the book you would like to see: "))
+            print(Library.get(booksearch, "This item is not in our library."))
+
+    if option == "3":
+        print("====================================")
+        for key, item in Library.items():
+                print(f"ID: {key} -------------------- Book: {item}")
+        u_book = int(input("Enter the ID of the book you would like to edit: "))
+        u_title = input("Enter the title of the book: ")
+        u_author = input("Enter the author of the book: ")
+        u_year = input("Enter the release year of the book: ")
+        updatedBook = {"title":u_title, "author":u_author, "year":u_year}
+        Library[u_book] = updatedBook
+
+    if option == "4":
+        print("====================================")
+        for key, item in Library.items():
+                print(f"ID: {key} -------------------- Book: {item}")
+        delete = int(input("Enter the ID of the book you would like to delete: "))
+        Library.pop(delete)
+        print("Item deleted successfully!")
+
+    if option == "5":
+        print("====================================")
+        print("Thanks, come back later")
+        menu = False
